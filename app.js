@@ -181,12 +181,20 @@ window.logout = async function() {
     window.location.href = 'login.html';
 };
 
-// Ajout d'un bouton de déconnexion flottant en haut à droite sur toutes les pages
-document.addEventListener('DOMContentLoaded', () => {
+// Ajout d'un bouton de déconnexion flottant
+function injectLogout() {
+    if (document.getElementById('logout-btn-global')) return;
     const btn = document.createElement('button');
+    btn.id = 'logout-btn-global';
     btn.onclick = window.logout;
-    btn.className = 'fixed top-3 right-4 text-gray-400 hover:text-red-500 transition z-[100] bg-white p-2 rounded-full shadow-sm';
+    btn.className = 'fixed top-2 right-4 text-gray-500 hover:text-red-600 transition z-[100] bg-white p-2 rounded-full shadow border border-gray-200';
     btn.innerHTML = '<i class="fas fa-power-off text-xl"></i>';
     btn.title = "Se déconnecter";
     document.body.appendChild(btn);
-});
+}
+
+if (document.body) {
+    injectLogout();
+} else {
+    document.addEventListener('DOMContentLoaded', injectLogout);
+}
