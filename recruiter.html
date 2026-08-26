@@ -2,98 +2,105 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoloWork - Recherche de Talents</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BoloWork - Réseau</title>
+    <!-- CSS Statique (Très rapide) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f3f2ef; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
-    
-    <nav class="bg-white shadow-sm py-4 px-8 flex justify-between items-center fixed w-full top-0 z-50">
-        <a href="index.html" class="text-2xl font-extrabold text-emerald-600"><i class="fas fa-arrow-left mr-2"></i> Accueil</a>
-        <div class="font-bold text-gray-700 hidden md:block">Espace Recruteur</div>
+<body class="text-gray-800 font-sans antialiased overflow-x-hidden pb-24">
+
+    <!-- Navbar Globale Supérieure -->
+    <nav class="bg-white border-b border-gray-200 fixed top-0 w-full z-50 h-14 flex items-center">
+        <div class="max-w-6xl mx-auto w-full px-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-9 h-9 bg-green-600 text-white rounded flex items-center justify-center font-bold text-xl tracking-tighter">bw</div>
+                <div class="hidden md:flex bg-blue-50 rounded px-3 py-1.5 items-center w-64 focus-within:w-80 transition-all duration-300">
+                    <i class="fas fa-search text-gray-500 text-sm"></i>
+                    <input type="text" placeholder="Recherche de contacts" class="bg-transparent border-none focus:outline-none ml-2 text-sm w-full">
+                </div>
+            </div>
+            <div class="hidden md:flex items-center space-x-6 text-gray-500 h-full">
+                <a href="index.html" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
+                    <i class="fas fa-home text-xl"></i><span class="text-xs font-semibold mt-1">Accueil</span>
+                </a>
+                <a href="recruiter.html" class="flex flex-col items-center justify-center text-green-700 border-b-2 border-green-700 h-full px-2">
+                    <i class="fas fa-user-friends text-xl"></i><span class="text-xs font-semibold mt-1">Réseau</span>
+                </a>
+                <a href="talent.html" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
+                    <i class="fas fa-briefcase text-xl"></i><span class="text-xs font-semibold mt-1">Emplois</span>
+                </a>
+            </div>
+            <div class="md:hidden flex items-center space-x-4 text-gray-500">
+                <i class="fas fa-user-plus text-2xl"></i>
+            </div>
+        </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-24 pb-12">
-        <div class="bg-white rounded-3xl shadow-lg p-8 mb-10">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">De quel talent avez-vous besoin ?</h2>
-            <div class="flex flex-col md:flex-row gap-4">
-                <div class="relative flex-grow">
-                    <i class="fas fa-search absolute left-6 top-5 text-gray-400 text-xl"></i>
-                    <input type="text" placeholder="Ex: Plombier aux Almadies, Développeur web à Dakar..." class="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 pl-14 pr-4 text-gray-700 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition">
-                </div>
-                <button class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-10 rounded-2xl shadow-lg text-lg transition">Rechercher</button>
-            </div>
+    <!-- Contenu Réseau -->
+    <div class="max-w-4xl mx-auto pt-20 px-4">
+        <div class="bg-white rounded-lg border border-gray-200 p-4 mb-4 flex justify-between items-center">
+            <h2 class="text-gray-800 font-bold">Gérer mon réseau</h2>
+            <i class="fas fa-chevron-right text-gray-500"></i>
         </div>
 
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-xl font-bold text-gray-700">Talents vérifiés recommandés (Dakar)</h3>
-            <span class="text-emerald-600 font-semibold cursor-pointer">Voir sur la carte <i class="fas fa-map"></i></span>
-        </div>
-
-        <!-- Grid de talents -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Talent 1 -->
-            <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1 flex flex-col">
-                <div class="p-6 flex-grow">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl"><i class="fas fa-bolt"></i></div>
-                        <div class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-check-circle mr-1"></i> Vérifié</div>
-                    </div>
-                    <h4 class="text-2xl font-bold text-gray-800 mb-1">Khadim Fall</h4>
-                    <p class="text-emerald-600 font-semibold mb-2">Électricien Bâtiment</p>
-                    <p class="text-gray-500 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Ngor, Dakar (à 2km)</p>
-                    <p class="text-gray-600 text-sm line-clamp-3">"Spécialiste en câblage résidentiel et dépannage d'urgence. Disponible 7j/7 pour vos travaux électriques avec matériel professionnel."</p>
-                </div>
-                <div class="bg-gray-50 p-4 border-t border-gray-100 flex justify-between items-center">
-                    <div class="text-yellow-500 font-bold"><i class="fas fa-star"></i> 4.9 <span class="text-gray-400 text-xs">(12 avis)</span></div>
-                    <button class="bg-[#25D366] hover:bg-green-600 text-white font-bold py-2 px-6 rounded-xl flex items-center space-x-2 transition">
-                        <i class="fab fa-whatsapp"></i> <span>Contacter</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Talent 2 -->
-            <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1 flex flex-col">
-                <div class="p-6 flex-grow">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-2xl"><i class="fas fa-laptop-code"></i></div>
-                        <div class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-check-circle mr-1"></i> Vérifié</div>
-                    </div>
-                    <h4 class="text-2xl font-bold text-gray-800 mb-1">Fatou Sow</h4>
-                    <p class="text-emerald-600 font-semibold mb-2">Développeuse Web & Mobile</p>
-                    <p class="text-gray-500 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Plateau, Dakar (à 5km)</p>
-                    <p class="text-gray-600 text-sm line-clamp-3">"Création de sites vitrines et applications mobiles sur mesure. Maitrise de React, Node.js et Flutter. 3 ans d'expérience en startup."</p>
-                </div>
-                <div class="bg-gray-50 p-4 border-t border-gray-100 flex justify-between items-center">
-                    <div class="text-yellow-500 font-bold"><i class="fas fa-star"></i> 5.0 <span class="text-gray-400 text-xs">(8 avis)</span></div>
-                    <button class="bg-[#25D366] hover:bg-green-600 text-white font-bold py-2 px-6 rounded-xl flex items-center space-x-2 transition">
-                        <i class="fab fa-whatsapp"></i> <span>Contacter</span>
-                    </button>
-                </div>
-            </div>
+        <div class="bg-white rounded-lg border border-gray-200 p-4">
+            <h2 class="text-gray-800 font-bold mb-4">Connaissez-vous ces personnes ?</h2>
             
-            <!-- Talent 3 -->
-            <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1 flex flex-col">
-                <div class="p-6 flex-grow">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-2xl"><i class="fas fa-hammer"></i></div>
-                    </div>
-                    <h4 class="text-2xl font-bold text-gray-800 mb-1">Abdoulaye Diop</h4>
-                    <p class="text-emerald-600 font-semibold mb-2">Menuisier Charpentier</p>
-                    <p class="text-gray-500 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Rufisque (à 15km)</p>
-                    <p class="text-gray-600 text-sm line-clamp-3">"Travail du bois local, charpente et meubles d'intérieur. Finitions soignées."</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- Carte Profil 1 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden flex flex-col items-center text-center relative">
+                    <button class="absolute top-2 right-2 text-gray-400 hover:text-gray-600"><i class="fas fa-times-circle text-lg"></i></button>
+                    <div class="h-16 w-full bg-gray-300"></div>
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center border-4 border-white shadow-sm text-gray-400 text-5xl -mt-10 mb-2"><i class="fas fa-user-circle"></i></div>
+                    <h3 class="font-bold text-gray-900 text-sm px-2">Ousmane Diop</h3>
+                    <p class="text-xs text-gray-500 mb-4 px-2 line-clamp-2">Développeur Full Stack | React | Node.js à Dakar</p>
+                    <button class="mb-4 text-green-700 border border-green-700 hover:bg-green-50 hover:border-green-800 font-bold py-1 px-4 rounded-full transition w-10/12">Se connecter</button>
                 </div>
-                <div class="bg-gray-50 p-4 border-t border-gray-100 flex justify-between items-center">
-                    <div class="text-yellow-500 font-bold"><i class="fas fa-star"></i> 4.5 <span class="text-gray-400 text-xs">(3 avis)</span></div>
-                    <button class="bg-[#25D366] hover:bg-green-600 text-white font-bold py-2 px-6 rounded-xl flex items-center space-x-2 transition">
-                        <i class="fab fa-whatsapp"></i> <span>Contacter</span>
-                    </button>
+
+                <!-- Carte Profil 2 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden flex flex-col items-center text-center relative">
+                    <button class="absolute top-2 right-2 text-gray-400 hover:text-gray-600"><i class="fas fa-times-circle text-lg"></i></button>
+                    <div class="h-16 w-full bg-orange-200"></div>
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center border-4 border-white shadow-sm text-gray-400 text-5xl -mt-10 mb-2"><i class="fas fa-user-circle"></i></div>
+                    <h3 class="font-bold text-gray-900 text-sm px-2">Aïssatou Sow</h3>
+                    <p class="text-xs text-gray-500 mb-4 px-2 line-clamp-2">Directrice RH chez SenTech Solutions</p>
+                    <button class="mb-4 text-green-700 border border-green-700 hover:bg-green-50 hover:border-green-800 font-bold py-1 px-4 rounded-full transition w-10/12">Se connecter</button>
+                </div>
+                
+                <!-- Carte Profil 3 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden flex flex-col items-center text-center relative">
+                    <button class="absolute top-2 right-2 text-gray-400 hover:text-gray-600"><i class="fas fa-times-circle text-lg"></i></button>
+                    <div class="h-16 w-full bg-blue-200"></div>
+                    <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center border-4 border-white shadow-sm text-gray-400 text-5xl -mt-10 mb-2"><i class="fas fa-user-circle"></i></div>
+                    <h3 class="font-bold text-gray-900 text-sm px-2">Moussa Ndiaye</h3>
+                    <p class="text-xs text-gray-500 mb-4 px-2 line-clamp-2">Menuisier professionnel - 10 ans d'expérience</p>
+                    <button class="mb-4 text-green-700 border border-green-700 hover:bg-green-50 hover:border-green-800 font-bold py-1 px-4 rounded-full transition w-10/12">Se connecter</button>
                 </div>
             </div>
-
         </div>
-    </main>
+    </div>
 
+    <!-- Bottom Tab Bar (Mobile) - Ajusté pour iPhone (Safe Area) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-200 flex justify-around items-start pt-2 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]" style="padding-bottom: calc(10px + env(safe-area-inset-bottom));">
+        <a href="index.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-home text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Accueil</span>
+        </a>
+        <a href="recruiter.html" class="flex flex-col items-center text-gray-900 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-user-friends text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Réseau</span>
+        </a>
+        <a href="index.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-plus-square text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Publier</span>
+        </a>
+        <a href="#" onclick="alert('Vos notifications arriveront ici !')" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-bell text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Notifs</span>
+        </a>
+        <a href="talent.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-briefcase text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Emplois</span>
+        </a>
+    </nav>
 </body>
 </html>
