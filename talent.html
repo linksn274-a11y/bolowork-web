@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BoloWork - Emplois</title>
-    <!-- CSS Statique (Très rapide) -->
+    <title>BoloWork - IA Studio</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body { background-color: #f3f2ef; }
+        .pulse-animation { animation: pulse 1.5s infinite; transform: scale(1.1); }
+        @keyframes pulse { 
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 
+            70% { box-shadow: 0 0 0 30px rgba(16, 185, 129, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } 
+        }
     </style>
 </head>
-<body class="text-gray-800 font-sans antialiased overflow-x-hidden pb-24">
+<body class="text-gray-800 font-sans antialiased overflow-x-hidden flex flex-col min-h-screen">
 
     <!-- Navbar Globale Supérieure -->
     <nav class="bg-white border-b border-gray-200 fixed top-0 w-full z-50 h-14 flex items-center">
         <div class="max-w-6xl mx-auto w-full px-4 flex items-center justify-between">
             <div class="flex items-center space-x-2">
                 <div class="w-9 h-9 bg-green-600 text-white rounded flex items-center justify-center font-bold text-xl tracking-tighter">bw</div>
-                <div class="hidden md:flex bg-blue-50 rounded px-3 py-1.5 items-center w-64 focus-within:w-80 transition-all duration-300">
-                    <i class="fas fa-search text-gray-500 text-sm"></i>
-                    <input type="text" placeholder="Recherche d'offres d'emploi" class="bg-transparent border-none focus:outline-none ml-2 text-sm w-full">
-                </div>
+                <div class="font-bold text-gray-700 ml-2">Studio IA</div>
             </div>
             <div class="hidden md:flex items-center space-x-6 text-gray-500 h-full">
                 <a href="index.html" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
@@ -31,65 +33,32 @@
                     <i class="fas fa-user-friends text-xl"></i><span class="text-xs font-semibold mt-1">Réseau</span>
                 </a>
                 <a href="talent.html" class="flex flex-col items-center justify-center text-green-700 border-b-2 border-green-700 h-full px-2">
-                    <i class="fas fa-briefcase text-xl"></i><span class="text-xs font-semibold mt-1">Emplois</span>
+                    <i class="fas fa-robot text-xl"></i><span class="text-xs font-semibold mt-1">IA Vocal</span>
                 </a>
-            </div>
-            <div class="md:hidden flex items-center space-x-4 text-gray-500">
-                <i class="fas fa-search text-2xl"></i>
             </div>
         </div>
     </nav>
 
-    <!-- Contenu Emplois -->
-    <div class="max-w-4xl mx-auto pt-20 px-4">
+    <main class="flex-grow flex flex-col items-center justify-center px-4 mt-16 mb-24 relative z-10" id="studio-view">
+        <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4 text-center">L'IA vous écoute</h2>
+        <p class="text-lg text-gray-500 mb-12 text-center max-w-xl">
+            L'Intelligence Artificielle de BoloWork transforme votre voix en un profil professionnel complet. Appuyez et parlez naturellement !
+        </p>
         
-        <!-- Alerte Enregistrement Vocal CV -->
-        <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 flex flex-col md:flex-row items-center justify-between">
-            <div class="mb-4 md:mb-0">
-                <h3 class="font-bold text-green-900 mb-1">Démarquez-vous avec un CV Vocal</h3>
-                <p class="text-sm text-green-800">Parlez simplement de votre expérience au lieu de taper un CV. Notre IA s'occupe du reste !</p>
-            </div>
-            <button onclick="alert('L\'enregistrement du profil arrive très bientôt ! Pour l\'instant, parlez directement dans le fil d\'actualité.')" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-full transition shadow whitespace-nowrap">
-                <i class="fas fa-microphone mr-2"></i> Créer mon profil
+        <div class="h-56 flex items-center justify-center mb-8 relative">
+            <button id="mic-btn" onclick="toggleRecording()" class="z-20 w-40 h-40 rounded-full flex items-center justify-center text-white shadow-2xl transition-all duration-300 bg-green-500 hover:bg-green-600">
+                <i class="fas fa-microphone text-6xl"></i>
             </button>
         </div>
-
-        <div class="bg-white rounded-lg border border-gray-200 p-4">
-            <h2 class="text-gray-800 font-bold mb-4 text-lg">Offres recommandées pour vous</h2>
-            
-            <div class="space-y-4">
-                <!-- Offre 1 -->
-                <div class="flex items-start border-b border-gray-200 pb-4">
-                    <div class="w-14 h-14 bg-gray-800 text-white rounded flex items-center justify-center font-bold text-lg mr-4 shrink-0">ST</div>
-                    <div class="flex-grow">
-                        <h3 class="font-bold text-green-700 hover:underline cursor-pointer">Chef de Chantier (H/F)</h3>
-                        <p class="text-sm text-gray-900">SenTech BTP</p>
-                        <p class="text-xs text-gray-500 mb-2">Dakar, Sénégal (Sur site)</p>
-                        <div class="flex items-center space-x-2">
-                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-1 rounded">Temps plein</span>
-                            <span class="text-xs text-gray-400">Il y a 2 heures</span>
-                        </div>
-                    </div>
-                    <button class="text-gray-400 hover:text-gray-700 transition"><i class="far fa-bookmark text-xl"></i></button>
-                </div>
-
-                <!-- Offre 2 -->
-                <div class="flex items-start pb-2">
-                    <div class="w-14 h-14 bg-blue-600 text-white rounded flex items-center justify-center font-bold text-lg mr-4 shrink-0">A</div>
-                    <div class="flex-grow">
-                        <h3 class="font-bold text-green-700 hover:underline cursor-pointer">Plombier Expérimenté</h3>
-                        <p class="text-sm text-gray-900">Artisans Associés</p>
-                        <p class="text-xs text-gray-500 mb-2">Pikine, Sénégal (Hybride)</p>
-                        <div class="flex items-center space-x-2">
-                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-1 rounded">Contrat court</span>
-                            <span class="text-xs text-gray-400">Il y a 1 jour</span>
-                        </div>
-                    </div>
-                    <button class="text-gray-400 hover:text-gray-700 transition"><i class="far fa-bookmark text-xl"></i></button>
-                </div>
-            </div>
+        
+        <div id="transcript-box" class="hidden w-full max-w-lg bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
+            <h3 class="font-bold text-gray-700 mb-2">Texte reconnu :</h3>
+            <p id="transcript-text" class="text-gray-600 italic">En attente de voix...</p>
+            <button class="mt-4 w-full bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-gray-900 transition shadow">
+                Générer mon profil avec l'IA <i class="fas fa-magic ml-2"></i>
+            </button>
         </div>
-    </div>
+    </main>
 
     <!-- Bottom Tab Bar (Mobile) - Ajusté pour iPhone (Safe Area) -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-200 flex justify-around items-start pt-2 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]" style="padding-bottom: calc(10px + env(safe-area-inset-bottom));">
@@ -106,8 +75,68 @@
             <i class="fas fa-bell text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Notifs</span>
         </a>
         <a href="talent.html" class="flex flex-col items-center text-gray-900 flex-1 hover:text-green-600 transition">
-            <i class="fas fa-briefcase text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Emplois</span>
+            <i class="fas fa-robot text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">IA Vocal</span>
         </a>
     </nav>
+
+    <script type="module" src="app.js"></script>
+    <script>
+        // Logique spécifique à la page IA
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let aiRec = null;
+        let isRecording = false;
+
+        if (SpeechRecognition) {
+            aiRec = new SpeechRecognition();
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            aiRec.continuous = !isIOS;
+            aiRec.interimResults = true;
+            aiRec.lang = 'fr-FR';
+            
+            aiRec.onresult = (event) => {
+                let text = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    text += event.results[i][0].transcript;
+                }
+                document.getElementById('transcript-text').innerText = text;
+            };
+            
+            aiRec.onend = () => {
+                if(isRecording && aiRec.continuous) aiRec.start(); // auto-restart if continuous
+            };
+        }
+
+        window.toggleRecording = function() {
+            if(!aiRec) {
+                alert("Votre navigateur ne supporte pas l'IA vocale native.");
+                return;
+            }
+            
+            const btn = document.getElementById('mic-btn');
+            const box = document.getElementById('transcript-box');
+            const text = document.getElementById('transcript-text');
+            
+            if(!isRecording) {
+                // Démarrer
+                isRecording = true;
+                btn.classList.add('pulse-animation', 'bg-red-500');
+                btn.classList.remove('bg-green-500');
+                btn.innerHTML = '<i class="fas fa-stop text-6xl"></i>';
+                
+                box.classList.remove('hidden');
+                text.innerText = "Écoute en cours...";
+                
+                try { aiRec.start(); } catch(e){}
+            } else {
+                // Arrêter
+                isRecording = false;
+                btn.classList.remove('pulse-animation', 'bg-red-500');
+                btn.classList.add('bg-green-500');
+                btn.innerHTML = '<i class="fas fa-microphone text-6xl"></i>';
+                
+                try { aiRec.stop(); } catch(e){}
+            }
+        };
+    </script>
 </body>
 </html>
