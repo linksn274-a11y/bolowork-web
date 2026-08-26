@@ -128,22 +128,22 @@
         </div>
     </div>
 
-    <!-- Bottom Tab Bar (Mobile) -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-200 flex justify-around items-center h-16 z-50 shadow-lg">
-        <a href="#" class="flex flex-col items-center text-gray-900 flex-1">
-            <i class="fas fa-home text-xl mb-1"></i><span class="text-xs font-semibold">Accueil</span>
+    <!-- Bottom Tab Bar (Mobile) - Ajusté pour iPhone (Safe Area) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-200 flex justify-around items-start pt-2 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]" style="padding-bottom: calc(10px + env(safe-area-inset-bottom));">
+        <a href="index.html" class="flex flex-col items-center text-gray-900 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-home text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Accueil</span>
         </a>
-        <a href="recruiter.html" class="flex flex-col items-center text-gray-500 flex-1">
-            <i class="fas fa-user-friends text-xl mb-1"></i><span class="text-xs font-semibold">Réseau</span>
+        <a href="recruiter.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-user-friends text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Réseau</span>
         </a>
-        <a href="#" onclick="toggleModal('post-modal')" class="flex flex-col items-center text-gray-500 flex-1">
-            <i class="fas fa-plus-square text-xl mb-1"></i><span class="text-xs font-semibold">Publier</span>
+        <a href="#" onclick="toggleModal('post-modal')" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-plus-square text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Publier</span>
         </a>
-        <a href="#" class="flex flex-col items-center text-gray-500 flex-1">
-            <i class="fas fa-bell text-xl mb-1"></i><span class="text-xs font-semibold">Notifs</span>
+        <a href="#" onclick="alert('Vos notifications arriveront ici !')" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-bell text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Notifs</span>
         </a>
-        <a href="#" class="flex flex-col items-center text-gray-500 flex-1">
-            <i class="fas fa-briefcase text-xl mb-1"></i><span class="text-xs font-semibold">Emplois</span>
+        <a href="talent.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-briefcase text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Emplois</span>
         </a>
     </nav>
 
