@@ -76,8 +76,8 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
                 throw error;
             }
             
-            // Si pas d'erreur, connexion réussie
-            window.location.href = 'index.html';
+            // Si pas d'erreur, connexion réussie -> On redirige vers la création de profil !
+            window.location.href = 'talent.html';
         }
     } catch (error) {
         alert("Erreur : " + error.message);

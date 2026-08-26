@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BoloWork - IA Studio</title>
+    <title>BoloWork - Mon Profil</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -11,129 +11,197 @@
         .pulse-animation { animation: pulse 1.5s infinite; transform: scale(1.1); }
         @keyframes pulse { 
             0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 
-            70% { box-shadow: 0 0 0 30px rgba(16, 185, 129, 0); } 
+            70% { box-shadow: 0 0 0 25px rgba(16, 185, 129, 0); } 
             100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } 
         }
     </style>
 </head>
 <body class="text-gray-800 font-sans antialiased overflow-x-hidden flex flex-col min-h-screen">
 
-    <!-- Navbar Globale Supérieure -->
-    <nav class="bg-white border-b border-gray-200 fixed top-0 w-full z-50 h-14 flex items-center">
+    <nav class="bg-white border-b border-gray-200 fixed top-0 w-full z-50 h-14 flex items-center shadow-sm">
         <div class="max-w-6xl mx-auto w-full px-4 flex items-center justify-between">
             <div class="flex items-center space-x-2">
                 <div class="w-9 h-9 bg-green-600 text-white rounded flex items-center justify-center font-bold text-xl tracking-tighter">bw</div>
-                <div class="font-bold text-gray-700 ml-2">Studio IA</div>
+                <div class="font-bold text-gray-700 ml-2">Configuration Profil</div>
             </div>
-            <div class="hidden md:flex items-center space-x-6 text-gray-500 h-full">
-                <a href="index.html" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
-                    <i class="fas fa-home text-xl"></i><span class="text-xs font-semibold mt-1">Accueil</span>
-                </a>
-                <a href="recruiter.html" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
-                    <i class="fas fa-user-friends text-xl"></i><span class="text-xs font-semibold mt-1">Réseau</span>
-                </a>
-                <a href="talent.html" class="flex flex-col items-center justify-center text-green-700 border-b-2 border-green-700 h-full px-2">
-                    <i class="fas fa-robot text-xl"></i><span class="text-xs font-semibold mt-1">IA Vocal</span>
-                </a>
-            </div>
+            <a href="index.html" class="text-gray-500 font-bold hover:text-green-600">Passer <i class="fas fa-arrow-right"></i></a>
         </div>
     </nav>
 
-    <main class="flex-grow flex flex-col items-center justify-center px-4 mt-16 mb-24 relative z-10" id="studio-view">
-        <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4 text-center">L'IA vous écoute</h2>
-        <p class="text-lg text-gray-500 mb-12 text-center max-w-xl">
-            L'Intelligence Artificielle de BoloWork transforme votre voix en un profil professionnel complet. Appuyez et parlez naturellement !
-        </p>
+    <main class="flex-grow flex flex-col items-center justify-center px-4 mt-20 mb-24 relative z-10 w-full max-w-lg mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center">Créons votre profil</h2>
+        <p class="text-gray-500 mb-8 text-center text-sm">Utilisez notre IA pour vous présenter à voix haute, ou remplissez manuellement.</p>
         
-        <div class="h-56 flex items-center justify-center mb-8 relative">
-            <button id="mic-btn" onclick="toggleRecording()" class="z-20 w-40 h-40 rounded-full flex items-center justify-center text-white shadow-2xl transition-all duration-300 bg-green-500 hover:bg-green-600">
-                <i class="fas fa-microphone text-6xl"></i>
+        <!-- TABS -->
+        <div class="flex w-full mb-8 bg-gray-200 rounded-lg p-1 shadow-inner">
+            <button onclick="switchTab('ai')" id="tab-ai" class="flex-1 bg-white shadow rounded-md py-2 font-bold text-green-700 transition">🎙️ IA Vocale</button>
+            <button onclick="switchTab('manual')" id="tab-manual" class="flex-1 text-gray-600 font-bold py-2 rounded-md transition">✍️ Manuel</button>
+        </div>
+
+        <!-- AI SECTION -->
+        <div id="ai-section" class="w-full flex flex-col items-center">
+            <div class="h-40 flex items-center justify-center mb-6 relative w-full">
+                <button id="mic-btn" onclick="toggleRecording()" class="z-20 w-32 h-32 rounded-full flex items-center justify-center text-white shadow-xl transition-all duration-300 bg-green-500 hover:bg-green-600">
+                    <i class="fas fa-microphone text-5xl"></i>
+                </button>
+            </div>
+            
+            <div id="transcript-box" class="w-full bg-white p-5 rounded-xl shadow border border-gray-100 mb-6 hidden">
+                <h3 class="font-bold text-gray-700 mb-2 text-sm"><i class="fas fa-robot text-green-600 mr-1"></i> Résumé de l'IA :</h3>
+                <p id="transcript-text" class="text-gray-700 italic min-h-[3rem]">Écoute en cours...</p>
+            </div>
+            
+            <button onclick="saveProfile()" id="btn-save-ai" class="w-full bg-gray-300 text-gray-500 font-bold py-3.5 rounded-xl transition shadow" disabled>
+                Sauvegarder le profil
             </button>
         </div>
-        
-        <div id="transcript-box" class="hidden w-full max-w-lg bg-white p-6 rounded-2xl shadow-lg border border-gray-200">
-            <h3 class="font-bold text-gray-700 mb-2">Texte reconnu :</h3>
-            <p id="transcript-text" class="text-gray-600 italic">En attente de voix...</p>
-            <button class="mt-4 w-full bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-gray-900 transition shadow">
-                Générer mon profil avec l'IA <i class="fas fa-magic ml-2"></i>
+
+        <!-- MANUAL SECTION -->
+        <div id="manual-section" class="w-full hidden space-y-5 bg-white p-6 rounded-2xl shadow border border-gray-100">
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Votre Métier / Titre</label>
+                <input type="text" id="job-title" placeholder="Ex: Plombier, Développeur..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-gray-700 mb-1">Présentez-vous</label>
+                <textarea id="bio" rows="4" placeholder="J'ai 5 ans d'expérience..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50"></textarea>
+            </div>
+            <button onclick="saveProfile()" class="w-full bg-green-600 text-white font-bold py-3.5 rounded-xl hover:bg-green-700 transition shadow mt-4">
+                Sauvegarder le profil
             </button>
         </div>
     </main>
 
-    <!-- Bottom Tab Bar (Mobile) - Ajusté pour iPhone (Safe Area) -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-200 flex justify-around items-start pt-2 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]" style="padding-bottom: calc(10px + env(safe-area-inset-bottom));">
-        <a href="index.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
-            <i class="fas fa-home text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Accueil</span>
-        </a>
-        <a href="recruiter.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
-            <i class="fas fa-user-friends text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Réseau</span>
-        </a>
-        <a href="index.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
-            <i class="fas fa-plus-square text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Publier</span>
-        </a>
-        <a href="#" onclick="alert('Vos notifications arriveront ici !')" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
-            <i class="fas fa-bell text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Notifs</span>
-        </a>
-        <a href="talent.html" class="flex flex-col items-center text-gray-900 flex-1 hover:text-green-600 transition">
-            <i class="fas fa-robot text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">IA Vocal</span>
-        </a>
-    </nav>
-
     <script type="module" src="app.js"></script>
+    <script type="module">
+        import { supabase } from './supabase.js';
+        window.supabaseClient = supabase;
+    </script>
+    
     <script>
-        // Logique spécifique à la page IA
+        // TABS LOGIC
+        window.switchTab = function(tab) {
+            const isAI = tab === 'ai';
+            document.getElementById('ai-section').classList.toggle('hidden', !isAI);
+            document.getElementById('manual-section').classList.toggle('hidden', isAI);
+            
+            const tabAI = document.getElementById('tab-ai');
+            const tabManual = document.getElementById('tab-manual');
+            
+            if(isAI) {
+                tabAI.classList.replace('text-gray-600', 'text-green-700');
+                tabAI.classList.add('bg-white', 'shadow');
+                tabManual.classList.remove('bg-white', 'shadow', 'text-green-700');
+                tabManual.classList.add('text-gray-600');
+            } else {
+                tabManual.classList.replace('text-gray-600', 'text-green-700');
+                tabManual.classList.add('bg-white', 'shadow');
+                tabAI.classList.remove('bg-white', 'shadow', 'text-green-700');
+                tabAI.classList.add('text-gray-600');
+                
+                // Si on passe en manuel, on coupe l'IA
+                if(isRecording) toggleRecording();
+            }
+        };
+
+        // SAVE LOGIC
+        window.saveProfile = async function() {
+            // MVP : On simule l'enregistrement du profil et on envoie directement l'utilisateur sur le fil d'actualité.
+            // Dans une version finale, on ferait un `await window.supabaseClient.from('profiles').insert(...)`
+            alert("Profil créé avec succès ! Bienvenue sur BoloWork !");
+            window.location.href = 'index.html';
+        };
+
+        // AI LOGIC
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         let aiRec = null;
         let isRecording = false;
+        let finalTranscript = "";
 
         if (SpeechRecognition) {
             aiRec = new SpeechRecognition();
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            aiRec.continuous = !isIOS;
+            // iOS bloque souvent le continuous=true. On met false pour forcer la stabilité.
+            aiRec.continuous = false;
             aiRec.interimResults = true;
             aiRec.lang = 'fr-FR';
             
             aiRec.onresult = (event) => {
-                let text = '';
+                let interim = '';
                 for (let i = event.resultIndex; i < event.results.length; ++i) {
-                    text += event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript + " ";
+                    } else {
+                        interim += event.results[i][0].transcript;
+                    }
                 }
-                document.getElementById('transcript-text').innerText = text;
+                
+                document.getElementById('transcript-text').innerText = finalTranscript + interim;
+                
+                if(finalTranscript.length > 5 || interim.length > 5) {
+                    const btn = document.getElementById('btn-save-ai');
+                    btn.disabled = false;
+                    btn.classList.replace('bg-gray-300', 'bg-green-600');
+                    btn.classList.replace('text-gray-500', 'text-white');
+                }
             };
             
-            aiRec.onend = () => {
-                if(isRecording && aiRec.continuous) aiRec.start(); // auto-restart if continuous
+            aiRec.onerror = (event) => {
+                // Ignore l'erreur "no-speech" qui arrive naturellement quand on se tait
+                if (event.error !== 'no-speech') {
+                    alert("Alerte micro iPhone : " + event.error + ". Essayez de relancer ou utilisez l'onglet Manuel.");
+                    isRecording = false;
+                    resetMicBtn();
+                }
             };
+
+            aiRec.onend = () => {
+                // Sur iOS, l'enregistrement s'arrête très vite quand on fait une pause.
+                // On relance automatiquement si l'utilisateur n'a pas appuyé sur "Stop".
+                if (isRecording) {
+                    try { aiRec.start(); } catch(e) {}
+                }
+            };
+        }
+
+        function resetMicBtn() {
+            const btn = document.getElementById('mic-btn');
+            btn.classList.remove('pulse-animation', 'bg-red-500');
+            btn.classList.add('bg-green-500');
+            btn.innerHTML = '<i class="fas fa-microphone text-5xl"></i>';
         }
 
         window.toggleRecording = function() {
             if(!aiRec) {
-                alert("Votre navigateur ne supporte pas l'IA vocale native.");
+                alert("Votre navigateur ne supporte pas la reconnaissance vocale. Utilisez le mode Manuel.");
                 return;
             }
             
             const btn = document.getElementById('mic-btn');
             const box = document.getElementById('transcript-box');
-            const text = document.getElementById('transcript-text');
             
             if(!isRecording) {
-                // Démarrer
+                // Start
                 isRecording = true;
                 btn.classList.add('pulse-animation', 'bg-red-500');
                 btn.classList.remove('bg-green-500');
-                btn.innerHTML = '<i class="fas fa-stop text-6xl"></i>';
-                
+                btn.innerHTML = '<i class="fas fa-stop text-5xl"></i>';
                 box.classList.remove('hidden');
-                text.innerText = "Écoute en cours...";
                 
-                try { aiRec.start(); } catch(e){}
+                if (finalTranscript === "") {
+                    document.getElementById('transcript-text').innerText = "Écoute en cours, parlez...";
+                }
+                
+                try { 
+                    aiRec.start(); 
+                } catch(e) {
+                    alert("Erreur micro : " + e.message);
+                    isRecording = false;
+                    resetMicBtn();
+                }
             } else {
-                // Arrêter
+                // Stop
                 isRecording = false;
-                btn.classList.remove('pulse-animation', 'bg-red-500');
-                btn.classList.add('bg-green-500');
-                btn.innerHTML = '<i class="fas fa-microphone text-6xl"></i>';
-                
+                resetMicBtn();
                 try { aiRec.stop(); } catch(e){}
             }
         };
