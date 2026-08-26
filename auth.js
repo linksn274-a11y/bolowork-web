@@ -30,8 +30,8 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
     const btn = document.getElementById('submit-btn');
     const originalText = btn.innerText;
     
-    if (phone.length < 7) {
-        alert("Veuillez entrer un numéro de téléphone valide.");
+    if (phone.length < 4) {
+        alert("Le numéro entré (" + rawPhone + ") est trop court. Entrez au moins 4 chiffres pour tester.");
         return;
     }
     
