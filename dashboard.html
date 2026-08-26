@@ -5,20 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoloWork - Fil d'actualité</title>
     <!-- Utilisation du fichier local pour un chargement instantané -->
-    <script src="tailwind-local.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body { background-color: #f3f2ef; } /* Couleur de fond exacte de LinkedIn */
         .modal-active { display: flex !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @media (min-width: 1024px) {
+            .lg-grid { grid-template-columns: 225px minmax(0,1fr) 300px; }
+        }
     </style>
 </head>
 <body class="text-gray-800 font-sans antialiased overflow-x-hidden">
 
     <!-- Navbar Globale Supérieure (Desktop & Mobile) -->
     <nav class="bg-white border-b border-gray-200 fixed top-0 w-full z-50 h-14 flex items-center">
-        <div class="max-w-[1128px] mx-auto w-full px-4 flex items-center justify-between">
+        <div class="max-w-6xl mx-auto w-full px-4 flex items-center justify-between">
             
             <!-- Logo et Recherche -->
             <div class="flex items-center space-x-2">
@@ -34,23 +37,23 @@
             <!-- Icônes de Menu (Desktop) -->
             <div class="hidden md:flex items-center space-x-6 text-gray-500 h-full">
                 <a href="#" class="flex flex-col items-center justify-center text-green-700 border-b-2 border-green-700 h-full px-2">
-                    <i class="fas fa-home text-xl"></i><span class="text-[10px] font-semibold mt-1">Accueil</span>
+                    <i class="fas fa-home text-xl"></i><span class="text-xs font-semibold mt-1">Accueil</span>
                 </a>
                 <a href="recruiter.html" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
-                    <i class="fas fa-user-friends text-xl"></i><span class="text-[10px] font-semibold mt-1">Réseau</span>
+                    <i class="fas fa-user-friends text-xl"></i><span class="text-xs font-semibold mt-1">Réseau</span>
                 </a>
                 <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
-                    <i class="fas fa-briefcase text-xl"></i><span class="text-[10px] font-semibold mt-1">Emplois</span>
+                    <i class="fas fa-briefcase text-xl"></i><span class="text-xs font-semibold mt-1">Emplois</span>
                 </a>
                 <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
-                    <i class="fas fa-comment-dots text-xl"></i><span class="text-[10px] font-semibold mt-1">Messagerie</span>
+                    <i class="fas fa-comment-dots text-xl"></i><span class="text-xs font-semibold mt-1">Messagerie</span>
                 </a>
                 <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
-                    <i class="fas fa-bell text-xl"></i><span class="text-[10px] font-semibold mt-1">Notifications</span>
+                    <i class="fas fa-bell text-xl"></i><span class="text-xs font-semibold mt-1">Notifications</span>
                 </a>
                 <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 border-l border-gray-200 pl-6 transition">
                     <div class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 text-xs"><i class="fas fa-user"></i></div>
-                    <span class="text-[10px] font-semibold mt-1">Vous <i class="fas fa-caret-down"></i></span>
+                    <span class="text-xs font-semibold mt-1">Vous <i class="fas fa-caret-down"></i></span>
                 </a>
             </div>
 
@@ -62,7 +65,7 @@
     </nav>
 
     <!-- Structure en Grille type LinkedIn -->
-    <div class="max-w-[1128px] mx-auto pt-20 px-4 grid grid-cols-1 lg:grid-cols-[225px_minmax(0,1fr)_300px] gap-6 pb-20">
+    <div class="max-w-6xl mx-auto pt-20 px-4 grid grid-cols-1 lg:lg-grid gap-6 pb-20">
         
         <!-- COLONNE GAUCHE (Mini Profil) -->
         <div class="hidden lg:block space-y-2">
@@ -200,19 +203,19 @@
     <!-- Bottom Tab Bar (Mobile uniquement) -->
     <nav class="md:hidden fixed bottom-0 w-full bg-white border-t border-gray-200 flex justify-around p-2 z-40">
         <a href="#" class="flex flex-col items-center text-gray-900">
-            <i class="fas fa-home text-xl mb-1"></i><span class="text-[10px] font-semibold">Accueil</span>
+            <i class="fas fa-home text-xl mb-1"></i><span class="text-xs font-semibold">Accueil</span>
         </a>
         <a href="recruiter.html" class="flex flex-col items-center text-gray-500">
-            <i class="fas fa-user-friends text-xl mb-1"></i><span class="text-[10px] font-semibold">Réseau</span>
+            <i class="fas fa-user-friends text-xl mb-1"></i><span class="text-xs font-semibold">Réseau</span>
         </a>
         <a href="#" onclick="toggleModal('post-modal')" class="flex flex-col items-center text-gray-500">
-            <i class="fas fa-plus-square text-xl mb-1"></i><span class="text-[10px] font-semibold">Publier</span>
+            <i class="fas fa-plus-square text-xl mb-1"></i><span class="text-xs font-semibold">Publier</span>
         </a>
         <a href="#" class="flex flex-col items-center text-gray-500">
-            <i class="fas fa-bell text-xl mb-1"></i><span class="text-[10px] font-semibold">Notifs</span>
+            <i class="fas fa-bell text-xl mb-1"></i><span class="text-xs font-semibold">Notifs</span>
         </a>
         <a href="#" class="flex flex-col items-center text-gray-500">
-            <i class="fas fa-briefcase text-xl mb-1"></i><span class="text-[10px] font-semibold">Emplois</span>
+            <i class="fas fa-briefcase text-xl mb-1"></i><span class="text-xs font-semibold">Emplois</span>
         </a>
     </nav>
 
