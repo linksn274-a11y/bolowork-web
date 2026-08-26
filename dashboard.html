@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BoloWork - Fil d'actualité</title>
-    <!-- Utilisation du fichier local pour un chargement instantané -->
+    <!-- CSS Statique (Très rapide) -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -19,22 +19,16 @@
 </head>
 <body class="text-gray-800 font-sans antialiased overflow-x-hidden">
 
-    <!-- Navbar Globale Supérieure (Desktop & Mobile) -->
+    <!-- Navbar Globale Supérieure -->
     <nav class="bg-white border-b border-gray-200 fixed top-0 w-full z-50 h-14 flex items-center">
         <div class="max-w-6xl mx-auto w-full px-4 flex items-center justify-between">
-            
-            <!-- Logo et Recherche -->
             <div class="flex items-center space-x-2">
-                <!-- Faux Logo LinkedIn mais aux couleurs BoloWork -->
                 <div class="w-9 h-9 bg-green-600 text-white rounded flex items-center justify-center font-bold text-xl tracking-tighter">bw</div>
-                
                 <div class="hidden md:flex bg-blue-50 rounded px-3 py-1.5 items-center w-64 focus-within:w-80 transition-all duration-300">
                     <i class="fas fa-search text-gray-500 text-sm"></i>
                     <input type="text" placeholder="Recherche" class="bg-transparent border-none focus:outline-none ml-2 text-sm w-full">
                 </div>
             </div>
-
-            <!-- Icônes de Menu (Desktop) -->
             <div class="hidden md:flex items-center space-x-6 text-gray-500 h-full">
                 <a href="#" class="flex flex-col items-center justify-center text-green-700 border-b-2 border-green-700 h-full px-2">
                     <i class="fas fa-home text-xl"></i><span class="text-xs font-semibold mt-1">Accueil</span>
@@ -51,28 +45,19 @@
                 <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
                     <i class="fas fa-bell text-xl"></i><span class="text-xs font-semibold mt-1">Notifications</span>
                 </a>
-                <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 border-l border-gray-200 pl-6 transition">
-                    <div class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 text-xs"><i class="fas fa-user"></i></div>
-                    <span class="text-xs font-semibold mt-1">Vous <i class="fas fa-caret-down"></i></span>
-                </a>
             </div>
-
-            <!-- Boutons Mobiles (Messages) -->
             <div class="md:hidden flex items-center space-x-4 text-gray-500">
                 <i class="fas fa-comment-dots text-2xl"></i>
             </div>
         </div>
     </nav>
 
-    <!-- Structure en Grille type LinkedIn -->
-    <div class="max-w-6xl mx-auto pt-20 px-4 grid grid-cols-1 lg:lg-grid gap-6 pb-20">
+    <!-- Structure en Grille -->
+    <div class="max-w-6xl mx-auto pt-20 px-4 grid grid-cols-1 lg:grid-cols-3 lg-grid gap-6 pb-24">
         
-        <!-- COLONNE GAUCHE (Mini Profil) -->
         <div class="hidden lg:block space-y-2">
             <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                <div class="h-14 bg-gray-300 relative">
-                    <!-- Photo de couverture basique -->
-                </div>
+                <div class="h-14 bg-gray-300 relative"></div>
                 <div class="flex justify-center -mt-8 relative">
                     <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center border-2 border-white shadow-sm text-gray-400 text-3xl"><i class="fas fa-user-circle"></i></div>
                 </div>
@@ -80,27 +65,10 @@
                     <h3 class="font-bold text-gray-900 hover:underline cursor-pointer">Talent BoloWork</h3>
                     <p class="text-xs text-gray-500 mt-1">Professionnel indépendant à Dakar</p>
                 </div>
-                <div class="p-3 text-xs font-semibold text-gray-500 hover:bg-gray-50 cursor-pointer flex justify-between">
-                    <span>Vues de votre profil</span>
-                    <span class="text-green-600">42</span>
-                </div>
-                <div class="p-3 text-xs font-semibold text-gray-500 hover:bg-gray-50 cursor-pointer flex justify-between border-t border-gray-200">
-                    <span>Relations</span>
-                    <span class="text-green-600">18</span>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-lg border border-gray-200 p-3 sticky top-20">
-                <p class="text-xs text-gray-500 hover:underline cursor-pointer">Groupes</p>
-                <p class="text-xs text-gray-500 hover:underline cursor-pointer mt-2">Événements</p>
-                <p class="text-xs text-gray-500 hover:underline cursor-pointer mt-2">Hashtags suivis</p>
             </div>
         </div>
 
-        <!-- COLONNE CENTRALE (Le Fil d'Actualité) -->
         <div class="w-full max-w-[600px] mx-auto lg:mx-0 lg:max-w-none space-y-4">
-            
-            <!-- Box de création de post -->
             <div class="bg-white rounded-lg border border-gray-200 p-3">
                 <div class="flex items-center space-x-2 mb-2">
                     <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 shrink-0"><i class="fas fa-user"></i></div>
@@ -112,59 +80,32 @@
                     <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 p-3 rounded-md font-semibold text-sm transition">
                         <i class="fas fa-image text-blue-500 text-xl"></i> <span class="hidden sm:inline">Média</span>
                     </button>
-                    <!-- Le bouton IA VOCALE au centre de la création de post -->
                     <button onclick="startVoicePost()" class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 p-3 rounded-md font-semibold text-sm transition tooltip" title="Parler à l'IA">
                         <i class="fas fa-microphone text-green-600 text-xl"></i> <span class="hidden sm:inline">Vocal (IA)</span>
                     </button>
                     <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 p-3 rounded-md font-semibold text-sm transition">
                         <i class="fas fa-briefcase text-purple-500 text-xl"></i> <span class="hidden sm:inline">Offre d'emploi</span>
                     </button>
-                    <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 p-3 rounded-md font-semibold text-sm transition">
-                        <i class="fas fa-newspaper text-orange-500 text-xl"></i> <span class="hidden sm:inline">Article</span>
-                    </button>
                 </div>
             </div>
-
-            <!-- Séparateur de tri -->
-            <div class="flex items-center space-x-2">
-                <hr class="flex-grow border-gray-300">
-                <span class="text-xs text-gray-500">Classer par : <span class="font-bold text-gray-800">Pertinence <i class="fas fa-caret-down"></i></span></span>
-            </div>
-
-            <!-- CONTENEUR DES VRAIS POSTS SUPABASE -->
+            
             <div id="new-posts-area">
                 <p class="text-center text-gray-500 py-8"><i class="fas fa-spinner fa-spin text-2xl"></i><br>Chargement du fil...</p>
             </div>
-            
         </div>
 
-        <!-- COLONNE DROITE (Suggestions) -->
         <div class="hidden lg:block space-y-4">
             <div class="bg-white rounded-lg border border-gray-200 p-4 sticky top-20">
                 <h3 class="font-bold text-gray-900 mb-4 text-sm">Ajouter à votre fil d'actualité</h3>
-                
                 <div class="flex items-start space-x-3 mb-4">
                     <div class="w-12 h-12 bg-gray-800 text-white rounded-full flex items-center justify-center font-bold text-xs shrink-0">SN</div>
                     <div>
                         <h4 class="font-bold text-gray-800 text-sm">SenTech Solutions</h4>
-                        <p class="text-xs text-gray-500 mb-2">Entreprise • Technologies et Services</p>
-                        <button class="text-gray-600 border border-gray-500 hover:bg-gray-100 px-4 py-1.5 rounded-full font-bold text-sm transition"><i class="fas fa-plus"></i> Suivre</button>
+                        <button class="text-gray-600 border border-gray-500 hover:bg-gray-100 px-4 py-1.5 rounded-full font-bold text-sm transition mt-2"><i class="fas fa-plus"></i> Suivre</button>
                     </div>
                 </div>
-
-                <div class="flex items-start space-x-3 mb-4">
-                    <div class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-xs shrink-0">BTP</div>
-                    <div>
-                        <h4 class="font-bold text-gray-800 text-sm">Africa Build</h4>
-                        <p class="text-xs text-gray-500 mb-2">Entreprise • BTP et Construction</p>
-                        <button class="text-gray-600 border border-gray-500 hover:bg-gray-100 px-4 py-1.5 rounded-full font-bold text-sm transition"><i class="fas fa-plus"></i> Suivre</button>
-                    </div>
-                </div>
-                
-                <a href="#" class="block text-sm font-semibold text-gray-500 hover:bg-gray-50 p-1 rounded transition mt-4">Voir toutes les suggestions <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
-
     </div>
 
     <!-- MODAL DE CRÉATION DE POST -->
@@ -177,22 +118,9 @@
                 </button>
             </div>
             <div class="p-6">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 text-xl"><i class="fas fa-user-circle"></i></div>
-                    <div>
-                        <h3 class="font-bold text-gray-900">Talent BoloWork</h3>
-                        <button class="text-xs border border-gray-500 text-gray-600 px-2 py-1 rounded-full mt-1 hover:bg-gray-100 font-semibold"><i class="fas fa-globe-americas"></i> N'importe qui <i class="fas fa-caret-down"></i></button>
-                    </div>
-                </div>
                 <textarea id="post-content" rows="5" class="w-full resize-none text-lg text-gray-800 placeholder-gray-500 focus:outline-none" placeholder="De quoi souhaitez-vous discuter ?"></textarea>
             </div>
-            <div class="px-6 py-3 flex items-center justify-between">
-                <div class="flex space-x-1">
-                    <button class="w-10 h-10 rounded-full text-gray-500 flex items-center justify-center hover:bg-gray-100 transition tooltip"><i class="fas fa-image text-xl"></i></button>
-                    <button class="w-10 h-10 rounded-full text-gray-500 flex items-center justify-center hover:bg-gray-100 transition tooltip"><i class="fab fa-youtube text-xl"></i></button>
-                    <button class="w-10 h-10 rounded-full text-gray-500 flex items-center justify-center hover:bg-gray-100 transition tooltip"><i class="fas fa-briefcase text-xl"></i></button>
-                    <button class="w-10 h-10 rounded-full text-gray-500 flex items-center justify-center hover:bg-gray-100 transition tooltip"><i class="fas fa-ellipsis-h text-xl"></i></button>
-                </div>
+            <div class="px-6 py-3 flex justify-end">
                 <button onclick="publishPost()" class="bg-gray-200 text-gray-400 font-bold py-1.5 px-4 rounded-full transition" id="post-btn">
                     Publier
                 </button>
@@ -200,44 +128,26 @@
         </div>
     </div>
 
-    <!-- Bottom Tab Bar (Mobile uniquement) -->
-    <nav class="md:hidden fixed bottom-0 w-full bg-white border-t border-gray-200 flex justify-around p-2 z-40">
-        <a href="#" class="flex flex-col items-center text-gray-900">
+    <!-- Bottom Tab Bar (Mobile) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-200 flex justify-around items-center h-16 z-50 shadow-lg">
+        <a href="#" class="flex flex-col items-center text-gray-900 flex-1">
             <i class="fas fa-home text-xl mb-1"></i><span class="text-xs font-semibold">Accueil</span>
         </a>
-        <a href="recruiter.html" class="flex flex-col items-center text-gray-500">
+        <a href="recruiter.html" class="flex flex-col items-center text-gray-500 flex-1">
             <i class="fas fa-user-friends text-xl mb-1"></i><span class="text-xs font-semibold">Réseau</span>
         </a>
-        <a href="#" onclick="toggleModal('post-modal')" class="flex flex-col items-center text-gray-500">
+        <a href="#" onclick="toggleModal('post-modal')" class="flex flex-col items-center text-gray-500 flex-1">
             <i class="fas fa-plus-square text-xl mb-1"></i><span class="text-xs font-semibold">Publier</span>
         </a>
-        <a href="#" class="flex flex-col items-center text-gray-500">
+        <a href="#" class="flex flex-col items-center text-gray-500 flex-1">
             <i class="fas fa-bell text-xl mb-1"></i><span class="text-xs font-semibold">Notifs</span>
         </a>
-        <a href="#" class="flex flex-col items-center text-gray-500">
+        <a href="#" class="flex flex-col items-center text-gray-500 flex-1">
             <i class="fas fa-briefcase text-xl mb-1"></i><span class="text-xs font-semibold">Emplois</span>
         </a>
     </nav>
 
     <!-- Inclusion de la logique Supabase -->
     <script type="module" src="app.js"></script>
-    <script>
-        // Activer visuellement le bouton Publier quand du texte est tapé
-        document.addEventListener('DOMContentLoaded', () => {
-            const content = document.getElementById('post-content');
-            const btn = document.getElementById('post-btn');
-            if(content && btn) {
-                content.addEventListener('input', () => {
-                    if(content.value.trim().length > 0) {
-                        btn.classList.replace('bg-gray-200', 'bg-green-600');
-                        btn.classList.replace('text-gray-400', 'text-white');
-                    } else {
-                        btn.classList.replace('bg-green-600', 'bg-gray-200');
-                        btn.classList.replace('text-white', 'text-gray-400');
-                    }
-                });
-            }
-        });
-    </script>
 </body>
 </html>
