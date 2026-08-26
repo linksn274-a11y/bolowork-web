@@ -1,5 +1,13 @@
 import { supabase } from './supabase.js';
 
+// --- AUTH GUARD (VÉRIFICATION DE CONNEXION) ---
+supabase.auth.getSession().then(({ data: { session } }) => {
+    // Si l'utilisateur n'est pas connecté et qu'il n'est pas déjà sur la page de login
+    if (!session && !window.location.href.includes('login.html')) {
+        window.location.href = 'login.html';
+    }
+});
+
 // --- INITIALISATION DE L'IA VOCALE (Web Speech API) ---
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = null;
@@ -82,8 +90,11 @@ window.publishPost = async function() {
     const btn = document.getElementById('post-btn');
     if(btn) btn.innerText = "Envoi...";
 
+    const { data: { session } } = await supabase.auth.getSession();
+    const userName = session && session.user.email ? session.user.email.split('@')[0] : 'Utilisateur';
+
     const { data, error } = await supabase.from('posts').insert([
-        { content: content, author_name: 'Talent BoloWork' }
+        { content: content, author_name: userName }
     ]);
 
     if (error) {
