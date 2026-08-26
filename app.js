@@ -174,3 +174,19 @@ window.loadPosts = async function() {
 if (document.getElementById('new-posts-area')) {
     window.loadPosts();
 }
+
+// --- DÉCONNEXION ---
+window.logout = async function() {
+    await supabase.auth.signOut();
+    window.location.href = 'login.html';
+};
+
+// Ajout d'un bouton de déconnexion flottant en haut à droite sur toutes les pages
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.createElement('button');
+    btn.onclick = window.logout;
+    btn.className = 'fixed top-3 right-4 text-gray-400 hover:text-red-500 transition z-[100] bg-white p-2 rounded-full shadow-sm';
+    btn.innerHTML = '<i class="fas fa-power-off text-xl"></i>';
+    btn.title = "Se déconnecter";
+    document.body.appendChild(btn);
+});
