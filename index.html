@@ -56,14 +56,20 @@
     <div class="max-w-6xl mx-auto pt-20 px-4 grid grid-cols-1 lg:grid-cols-3 lg-grid gap-6 pb-24">
         
         <div class="hidden lg:block space-y-2">
-            <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                <div class="h-14 bg-gray-300 relative"></div>
-                <div class="flex justify-center -mt-8 relative">
-                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center border-2 border-white shadow-sm text-gray-400 text-3xl"><i class="fas fa-user-circle"></i></div>
+            <div class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm relative">
+                <div id="mini-cover" class="h-14 bg-gray-300 relative cursor-pointer cover-bg" onclick="window.location.href='profile.html'"></div>
+                <div class="flex justify-center -mt-8 relative cursor-pointer" onclick="window.location.href='profile.html'">
+                    <img id="mini-avatar" src="https://ui-avatars.com/api/?name=U&background=random" class="w-16 h-16 rounded-full border-2 border-white object-cover shadow-sm bg-white">
                 </div>
-                <div class="text-center p-4 pt-2 border-b border-gray-200">
-                    <h3 class="font-bold text-gray-900 hover:underline cursor-pointer">Talent BoloWork</h3>
-                    <p class="text-xs text-gray-500 mt-1">Professionnel indépendant à Dakar</p>
+                <div class="text-center mt-3 pb-4 border-b border-gray-200">
+                    <h3 id="mini-name" class="font-bold text-gray-900 hover:underline cursor-pointer" onclick="window.location.href='profile.html'">Utilisateur</h3>
+                    <p id="mini-headline" class="text-xs text-gray-500 mt-1 px-4 line-clamp-2">Profil en cours de création</p>
+                </div>
+                <div class="py-3 px-4 hover:bg-gray-50 cursor-pointer transition">
+                    <div class="flex justify-between text-xs font-semibold">
+                        <span class="text-gray-500">Relations</span>
+                        <span class="text-blue-600">10</span>
+                    </div>
                 </div>
             </div>
         </div>

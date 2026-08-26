@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BoloWork - Mon Profil</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f3f2ef; }
+        .modal-active { display: flex !important; }
+        .cover-bg { background-size: cover; background-position: center; }
+    </style>
+</head>
+<body class="text-gray-800 font-sans antialiased overflow-x-hidden pb-24">
+
+    <!-- Navbar Globale -->
+    <nav class="bg-white border-b border-gray-200 fixed top-0 w-full z-40 h-14 flex items-center">
+        <div class="max-w-6xl mx-auto w-full px-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-9 h-9 bg-green-600 text-white rounded flex items-center justify-center font-bold text-xl tracking-tighter cursor-pointer" onclick="window.location.href='index.html'">bw</div>
+                <div class="hidden md:flex bg-blue-50 rounded px-3 py-1.5 items-center w-64">
+                    <i class="fas fa-search text-gray-500 text-sm"></i>
+                    <input type="text" placeholder="Recherche" class="bg-transparent border-none focus:outline-none ml-2 text-sm w-full">
+                </div>
+            </div>
+            <div class="hidden md:flex items-center space-x-6 text-gray-500 h-full">
+                <a href="index.html" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
+                    <i class="fas fa-home text-xl"></i><span class="text-xs font-semibold mt-1">Accueil</span>
+                </a>
+                <a href="recruiter.html" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
+                    <i class="fas fa-user-friends text-xl"></i><span class="text-xs font-semibold mt-1">Réseau</span>
+                </a>
+                <a href="profile.html" class="flex flex-col items-center justify-center text-green-700 border-b-2 border-green-700 h-full px-2 transition">
+                    <i class="fas fa-user-circle text-xl"></i><span class="text-xs font-semibold mt-1">Vous</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto pt-20 px-4 sm:px-6 lg:px-8">
+        <!-- Profile Card -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative mb-4">
+            <!-- Cover Photo -->
+            <div id="cover-photo" class="h-32 sm:h-48 cover-bg relative bg-gray-300">
+                <button onclick="toggleModal('edit-photo-modal', 'cover')" class="absolute top-4 right-4 bg-white text-gray-700 w-8 h-8 rounded-full flex items-center justify-center shadow hover:bg-gray-100 transition"><i class="fas fa-camera"></i></button>
+            </div>
+            
+            <!-- Profile Info -->
+            <div class="px-6 pb-6 relative">
+                <!-- Avatar -->
+                <div class="relative inline-block -mt-12 sm:-mt-16 mb-3">
+                    <img id="profile-avatar" src="https://ui-avatars.com/api/?name=U&background=random" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-white object-cover shadow-sm bg-white">
+                    <button onclick="toggleModal('edit-photo-modal', 'avatar')" class="absolute bottom-1 right-1 bg-white text-gray-600 w-8 h-8 rounded-full flex items-center justify-center shadow-md border border-gray-200 hover:bg-gray-100 transition"><i class="fas fa-camera text-xs"></i></button>
+                </div>
+
+                <!-- Edit Intro Button -->
+                <button onclick="toggleModal('edit-intro-modal')" class="absolute top-4 right-6 text-gray-500 hover:bg-gray-100 w-9 h-9 rounded-full flex items-center justify-center transition"><i class="fas fa-pencil-alt text-lg"></i></button>
+
+                <!-- Text Info -->
+                <h1 id="profile-name" class="text-2xl font-bold text-gray-900">Utilisateur</h1>
+                <p id="profile-headline" class="text-gray-800 text-sm mt-1">Titre professionnel ou métier</p>
+                <p id="profile-location" class="text-gray-500 text-xs mt-1">Sénégal · <a href="#" class="text-green-700 font-semibold hover:underline">10 relations</a></p>
+                
+                <div class="mt-4 flex space-x-2">
+                    <button class="bg-green-700 text-white font-bold py-1.5 px-4 rounded-full hover:bg-green-800 transition shadow-sm text-sm">Disponible pour travailler</button>
+                    <button class="border border-green-700 text-green-700 font-bold py-1.5 px-4 rounded-full hover:bg-green-50 transition shadow-sm text-sm">Ajouter une section</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-4 relative">
+            <button onclick="toggleModal('edit-about-modal')" class="absolute top-4 right-6 text-gray-500 hover:bg-gray-100 w-9 h-9 rounded-full flex items-center justify-center transition"><i class="fas fa-pencil-alt text-lg"></i></button>
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Infos (Description)</h2>
+            <p id="profile-bio" class="text-sm text-gray-800 whitespace-pre-line">Décrivez votre expérience, vos compétences et ce que vous recherchez. Utilisez l'IA lors de l'inscription ou modifiez ce texte en cliquant sur le crayon.</p>
+        </div>
+    </main>
+
+    <!-- Bottom Tab Bar (Mobile) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white border-t border-gray-200 flex justify-around items-start pt-2 z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]" style="padding-bottom: calc(10px + env(safe-area-inset-bottom));">
+        <a href="index.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-home text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Accueil</span>
+        </a>
+        <a href="recruiter.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-user-friends text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Réseau</span>
+        </a>
+        <a href="index.html" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-plus-square text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Publier</span>
+        </a>
+        <a href="#" onclick="alert('Vos notifications arriveront ici !')" class="flex flex-col items-center text-gray-500 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-bell text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Notifs</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center text-gray-900 flex-1 hover:text-green-600 transition">
+            <i class="fas fa-user-circle text-xl mb-1"></i><span style="font-size: 10px;" class="font-semibold">Profil</span>
+        </a>
+    </nav>
+
+    <!-- MODALS D'ÉDITION -->
+    <!-- Intro Modal -->
+    <div id="edit-intro-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 items-center justify-center p-4">
+        <div class="bg-white rounded-lg w-full max-w-lg shadow-2xl overflow-hidden flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-xl font-bold text-gray-800">Modifier l'introduction</h2>
+                <button onclick="toggleModal('edit-intro-modal')" class="text-gray-500 hover:bg-gray-100 w-8 h-8 rounded-full"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div><label class="block text-sm text-gray-600 mb-1">Prénom & Nom</label><input type="text" id="input-name" class="w-full border border-gray-300 rounded p-2 focus:ring-green-500 focus:border-green-500"></div>
+                <div><label class="block text-sm text-gray-600 mb-1">Titre du profil</label><input type="text" id="input-headline" class="w-full border border-gray-300 rounded p-2 focus:ring-green-500 focus:border-green-500"></div>
+                <div><label class="block text-sm text-gray-600 mb-1">Lieu</label><input type="text" id="input-location" class="w-full border border-gray-300 rounded p-2 focus:ring-green-500 focus:border-green-500"></div>
+            </div>
+            <div class="px-6 py-4 border-t border-gray-200 flex justify-end">
+                <button onclick="saveIntro()" class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-6 rounded-full">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="edit-about-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 items-center justify-center p-4">
+        <div class="bg-white rounded-lg w-full max-w-lg shadow-2xl overflow-hidden flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-xl font-bold text-gray-800">Modifier la description</h2>
+                <button onclick="toggleModal('edit-about-modal')" class="text-gray-500 hover:bg-gray-100 w-8 h-8 rounded-full"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6">
+                <label class="block text-sm text-gray-600 mb-2">Infos</label>
+                <textarea id="input-bio" rows="8" class="w-full border border-gray-300 rounded p-3 focus:ring-green-500 focus:border-green-500"></textarea>
+            </div>
+            <div class="px-6 py-4 border-t border-gray-200 flex justify-end">
+                <button onclick="saveBio()" class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-6 rounded-full">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Upload Modal -->
+    <div id="edit-photo-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 items-center justify-center p-4">
+        <div class="bg-white rounded-lg w-full max-w-md shadow-2xl overflow-hidden flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-xl font-bold text-gray-800">Changer la photo</h2>
+                <button onclick="toggleModal('edit-photo-modal')" class="text-gray-500 hover:bg-gray-100 w-8 h-8 rounded-full"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6 flex flex-col items-center">
+                <i class="fas fa-images text-5xl text-gray-300 mb-4"></i>
+                <p class="text-center text-gray-600 mb-6 text-sm">Sélectionnez une image sur votre appareil pour personnaliser votre profil.</p>
+                <input type="file" id="file-upload" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100 cursor-pointer">
+            </div>
+            <div class="px-6 py-4 border-t border-gray-200 flex justify-end">
+                <button onclick="savePhoto()" class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-6 rounded-full">Appliquer</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+    <script>
+        let currentPhotoTarget = 'avatar'; // 'avatar' or 'cover'
+
+        window.toggleModal = function(id, target = 'avatar') {
+            const el = document.getElementById(id);
+            if(el) {
+                el.classList.toggle('hidden');
+                el.classList.toggle('modal-active');
+            }
+            if(id === 'edit-photo-modal') {
+                currentPhotoTarget = target;
+            }
+        };
+
+        // Charger les données du profil depuis le localStorage
+        function loadProfile() {
+            const data = JSON.parse(localStorage.getItem('bolowork_profile')) || {
+                name: "Nouveau Membre",
+                headline: "Profil en cours de création",
+                location: "Sénégal",
+                bio: "Aucune description renseignée pour le moment.",
+                avatar: "https://ui-avatars.com/api/?name=N&background=random",
+                cover: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            };
+
+            // Mettre à jour l'UI
+            document.getElementById('profile-name').innerText = data.name;
+            document.getElementById('profile-headline').innerText = data.headline;
+            document.getElementById('profile-location').innerText = data.location;
+            document.getElementById('profile-bio').innerText = data.bio;
+            document.getElementById('profile-avatar').src = data.avatar;
+            document.getElementById('cover-photo').style.backgroundImage = `url('${data.cover}')`;
+
+            // Remplir les formulaires
+            document.getElementById('input-name').value = data.name;
+            document.getElementById('input-headline').value = data.headline;
+            document.getElementById('input-location').value = data.location;
+            document.getElementById('input-bio').value = data.bio;
+        }
+
+        // Sauvegarder Introduction
+        window.saveIntro = function() {
+            const data = JSON.parse(localStorage.getItem('bolowork_profile')) || {};
+            data.name = document.getElementById('input-name').value;
+            data.headline = document.getElementById('input-headline').value;
+            data.location = document.getElementById('input-location').value;
+            localStorage.setItem('bolowork_profile', JSON.stringify(data));
+            toggleModal('edit-intro-modal');
+            loadProfile();
+        };
+
+        // Sauvegarder Bio
+        window.saveBio = function() {
+            const data = JSON.parse(localStorage.getItem('bolowork_profile')) || {};
+            data.bio = document.getElementById('input-bio').value;
+            localStorage.setItem('bolowork_profile', JSON.stringify(data));
+            toggleModal('edit-about-modal');
+            loadProfile();
+        };
+
+        // Sauvegarder Photo (MVP: Enregistre le Base64 dans localStorage)
+        window.savePhoto = function() {
+            const fileInput = document.getElementById('file-upload');
+            if(fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const data = JSON.parse(localStorage.getItem('bolowork_profile')) || {};
+                    if(currentPhotoTarget === 'avatar') {
+                        data.avatar = e.target.result;
+                    } else {
+                        data.cover = e.target.result;
+                    }
+                    // Attention: Le Base64 peut être lourd pour localStorage, mais parfait pour un test MVP
+                    try {
+                        localStorage.setItem('bolowork_profile', JSON.stringify(data));
+                    } catch (err) {
+                        alert("Image trop volumineuse. Veuillez choisir une image plus petite.");
+                    }
+                    toggleModal('edit-photo-modal');
+                    loadProfile();
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                toggleModal('edit-photo-modal');
+            }
+        };
+
+        // Au chargement de la page
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html>

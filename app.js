@@ -181,6 +181,24 @@ window.logout = async function() {
     window.location.href = 'login.html';
 };
 
+// Chargement du mini-profil s'il existe sur la page courante
+document.addEventListener('DOMContentLoaded', () => {
+    const data = JSON.parse(localStorage.getItem('bolowork_profile'));
+    if (data && document.getElementById('mini-name')) {
+        document.getElementById('mini-name').innerText = data.name || 'Utilisateur';
+        document.getElementById('mini-headline').innerText = data.headline || '';
+        
+        if (data.avatar && document.getElementById('mini-avatar')) {
+            document.getElementById('mini-avatar').src = data.avatar;
+        }
+        if (data.cover && document.getElementById('mini-cover')) {
+            document.getElementById('mini-cover').style.backgroundImage = `url('${data.cover}')`;
+            document.getElementById('mini-cover').style.backgroundSize = 'cover';
+            document.getElementById('mini-cover').style.backgroundPosition = 'center';
+        }
+    }
+});
+
 // Ajout d'un bouton de déconnexion flottant
 function injectLogout() {
     if (document.getElementById('logout-btn-global')) return;

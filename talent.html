@@ -106,10 +106,31 @@
 
         // SAVE LOGIC
         window.saveProfile = async function() {
-            // MVP : On simule l'enregistrement du profil et on envoie directement l'utilisateur sur le fil d'actualité.
-            // Dans une version finale, on ferait un `await window.supabaseClient.from('profiles').insert(...)`
+            // MVP : Sauvegarde locale des informations pour affichage sur le Profil
+            const jobTitle = document.getElementById('job-title').value.trim();
+            const manualBio = document.getElementById('bio').value.trim();
+            
+            // Si on utilise l'IA, on prend le transcript final
+            const aiBio = (finalTranscript.trim() === "") ? document.getElementById('transcript-text').innerText : finalTranscript;
+            
+            // On détermine ce que l'utilisateur a vraiment rempli
+            const activeTab = document.getElementById('ai-section').classList.contains('hidden') ? 'manual' : 'ai';
+            const finalBio = (activeTab === 'manual') ? manualBio : aiBio.replace('Écoute en cours, parlez...', '');
+            
+            const data = JSON.parse(localStorage.getItem('bolowork_profile')) || {
+                name: "Nouveau Membre", 
+                location: "Sénégal",
+                avatar: "https://ui-avatars.com/api/?name=N&background=random",
+                cover: "https://images.unsplash.com/photo-1616423640778-28d1b53229bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+            };
+            
+            data.headline = jobTitle || "Profil en cours de création";
+            data.bio = finalBio || "Aucune description renseignée.";
+            
+            localStorage.setItem('bolowork_profile', JSON.stringify(data));
+
             alert("Profil créé avec succès ! Bienvenue sur BoloWork !");
-            window.location.href = 'index.html';
+            window.location.href = 'profile.html';
         };
 
         // AI LOGIC
