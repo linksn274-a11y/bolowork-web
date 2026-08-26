@@ -219,21 +219,32 @@ window.loadPosts = async function() {
     posts.forEach(post => {
         const dateFr = new Date(post.created_at).toLocaleTimeString('fr-FR', { hour: '2-digit', minute:'2-digit' });
         const postHTML = `
-        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mb-4">
-            <div class="p-5 flex items-center space-x-3">
-                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600"><i class="fas fa-user"></i></div>
-                <div>
-                    <h3 class="font-bold text-gray-800">${post.author_name}</h3>
-                    <p class="text-xs text-gray-500">${dateFr}</p>
+        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden mb-4">
+            <div class="p-4 flex items-start space-x-3">
+                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 text-xl shrink-0"><i class="fas fa-user-circle"></i></div>
+                <div class="flex-grow">
+                    <h3 class="font-bold text-gray-900 text-sm hover:text-green-600 hover:underline cursor-pointer">${post.author_name}</h3>
+                    <p class="text-xs text-gray-500">Membre du réseau</p>
+                    <p class="text-[10px] text-gray-400 flex items-center mt-0.5">${dateFr} • <i class="fas fa-globe-americas ml-1"></i></p>
                 </div>
+                <button class="text-gray-500 hover:bg-gray-100 w-8 h-8 rounded-full transition"><i class="fas fa-ellipsis-h"></i></button>
             </div>
-            <div class="px-5 pb-4">
-                <p class="text-gray-700">${post.content}</p>
+            <div class="px-4 pb-4">
+                <p class="text-gray-800 text-sm">${post.content}</p>
             </div>
-            <div class="px-5 py-3 flex justify-between border-t border-gray-100 text-gray-500 font-semibold text-sm">
-                <button class="flex items-center space-x-2 hover:text-green-600"><i class="far fa-thumbs-up text-lg"></i> <span>J'aime</span></button>
-                <button class="flex items-center space-x-2 hover:text-green-600"><i class="far fa-comment text-lg"></i> <span>Commenter</span></button>
-                <button class="flex items-center space-x-2 hover:text-green-600"><i class="fas fa-share text-lg"></i> <span>Partager</span></button>
+            <div class="px-4 py-2 border-t border-gray-200 flex justify-between">
+                <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 rounded-md px-3 py-2 transition font-semibold text-sm">
+                    <i class="far fa-thumbs-up text-lg"></i> <span class="hidden sm:inline">J'aime</span>
+                </button>
+                <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 rounded-md px-3 py-2 transition font-semibold text-sm">
+                    <i class="far fa-comment text-lg"></i> <span class="hidden sm:inline">Commenter</span>
+                </button>
+                <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 rounded-md px-3 py-2 transition font-semibold text-sm">
+                    <i class="fas fa-retweet text-lg"></i> <span class="hidden sm:inline">Republier</span>
+                </button>
+                <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 rounded-md px-3 py-2 transition font-semibold text-sm">
+                    <i class="fas fa-paper-plane text-lg"></i> <span class="hidden sm:inline">Envoyer</span>
+                </button>
             </div>
         </div>`;
         feedContainer.insertAdjacentHTML('beforeend', postHTML);

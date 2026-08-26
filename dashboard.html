@@ -3,177 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoloWork - Réseau Professionnel</title>
-    <!-- Utilisation du fichier local pour un chargement instantané (0 ms de réseau) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>BoloWork - Fil d'actualité</title>
+    <!-- Utilisation du fichier local pour un chargement instantané -->
+    <script src="tailwind-local.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        body { background-color: #f3f2ef; } /* Couleur de fond exacte de LinkedIn */
+        .modal-active { display: flex !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* Remplacement des classes personnalisées pour que ça marche avec le CSS statique */
-        @media (min-width: 768px) {
-            .custom-nav-desktop { margin-right: 850px; }
-            .custom-feed-desktop { width: 600px; }
-        }
-        @media (min-width: 1024px) {
-            .custom-sidebar-right { margin-left: 950px; }
-        }
-        .modal-active { display: flex !important; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans antialiased overflow-x-hidden">
+<body class="text-gray-800 font-sans antialiased overflow-x-hidden">
 
-    <!-- Topbar (Mobile) -->
-    <header class="md:hidden bg-white shadow-sm p-4 flex justify-between items-center fixed top-0 w-full z-40">
-        <div class="text-2xl font-extrabold text-green-600">BoloWork</div>
-        <div class="space-x-4 text-gray-500 text-xl">
-            <i class="fas fa-search"></i>
-            <i class="fas fa-bell"></i>
+    <!-- Navbar Globale Supérieure (Desktop & Mobile) -->
+    <nav class="bg-white border-b border-gray-200 fixed top-0 w-full z-50 h-14 flex items-center">
+        <div class="max-w-[1128px] mx-auto w-full px-4 flex items-center justify-between">
+            
+            <!-- Logo et Recherche -->
+            <div class="flex items-center space-x-2">
+                <!-- Faux Logo LinkedIn mais aux couleurs BoloWork -->
+                <div class="w-9 h-9 bg-green-600 text-white rounded flex items-center justify-center font-bold text-xl tracking-tighter">bw</div>
+                
+                <div class="hidden md:flex bg-blue-50 rounded px-3 py-1.5 items-center w-64 focus-within:w-80 transition-all duration-300">
+                    <i class="fas fa-search text-gray-500 text-sm"></i>
+                    <input type="text" placeholder="Recherche" class="bg-transparent border-none focus:outline-none ml-2 text-sm w-full">
+                </div>
+            </div>
+
+            <!-- Icônes de Menu (Desktop) -->
+            <div class="hidden md:flex items-center space-x-6 text-gray-500 h-full">
+                <a href="#" class="flex flex-col items-center justify-center text-green-700 border-b-2 border-green-700 h-full px-2">
+                    <i class="fas fa-home text-xl"></i><span class="text-[10px] font-semibold mt-1">Accueil</span>
+                </a>
+                <a href="recruiter.html" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
+                    <i class="fas fa-user-friends text-xl"></i><span class="text-[10px] font-semibold mt-1">Réseau</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
+                    <i class="fas fa-briefcase text-xl"></i><span class="text-[10px] font-semibold mt-1">Emplois</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
+                    <i class="fas fa-comment-dots text-xl"></i><span class="text-[10px] font-semibold mt-1">Messagerie</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 transition">
+                    <i class="fas fa-bell text-xl"></i><span class="text-[10px] font-semibold mt-1">Notifications</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center hover:text-gray-800 h-full px-2 border-l border-gray-200 pl-6 transition">
+                    <div class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 text-xs"><i class="fas fa-user"></i></div>
+                    <span class="text-[10px] font-semibold mt-1">Vous <i class="fas fa-caret-down"></i></span>
+                </a>
+            </div>
+
+            <!-- Boutons Mobiles (Messages) -->
+            <div class="md:hidden flex items-center space-x-4 text-gray-500">
+                <i class="fas fa-comment-dots text-2xl"></i>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <div class="max-w-7xl mx-auto flex justify-center md:pt-8 md:pb-8 pt-20 pb-24 h-screen relative">
+    <!-- Structure en Grille type LinkedIn -->
+    <div class="max-w-[1128px] mx-auto pt-20 px-4 grid grid-cols-1 lg:grid-cols-[225px_minmax(0,1fr)_300px] gap-6 pb-20">
         
-        <!-- Sidebar (Menu Desktop) -->
-        <nav class="hidden md:flex flex-col w-64 fixed left-auto custom-nav-desktop bg-white rounded-3xl shadow-sm p-6 space-y-2 h-fit">
-            <div class="text-3xl font-extrabold text-green-600 mb-8 px-4">BoloWork</div>
-            <a href="#" class="flex items-center space-x-4 bg-green-50 text-green-600 font-bold px-4 py-3 rounded-2xl">
-                <i class="fas fa-home text-xl w-6"></i> <span>Accueil</span>
-            </a>
-            <a href="recruiter.html" class="flex items-center space-x-4 text-gray-600 hover:bg-gray-50 hover:text-green-600 font-semibold px-4 py-3 rounded-2xl transition">
-                <i class="fas fa-users text-xl w-6"></i> <span>Réseau / Entreprises</span>
-            </a>
-            <a href="#" class="flex items-center space-x-4 text-gray-600 hover:bg-gray-50 hover:text-green-600 font-semibold px-4 py-3 rounded-2xl transition">
-                <i class="fas fa-briefcase text-xl w-6"></i> <span>Offres d'emploi</span>
-            </a>
-            <a href="#" class="flex items-center space-x-4 text-gray-600 hover:bg-gray-50 hover:text-green-600 font-semibold px-4 py-3 rounded-2xl transition mt-4">
-                <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"><i class="fas fa-user text-sm"></i></div>
-                <span>Mon Profil</span>
-            </a>
-            <button onclick="toggleModal('post-modal')" class="mt-8 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg flex items-center justify-center space-x-2 transition">
-                <i class="fas fa-plus"></i> <span>Publier un post</span>
-            </button>
-        </nav>
-
-        <!-- Main Feed (Fil d'actualité) -->
-        <main class="w-full custom-feed-desktop flex flex-col space-y-4 px-4 md:px-0 overflow-y-auto no-scrollbar pb-20" id="feed-container">
-            
-            <!-- Box de création de post interactive -->
-            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 flex items-center space-x-4">
-                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-400 shrink-0"><i class="fas fa-user"></i></div>
-                <div onclick="toggleModal('post-modal')" class="bg-gray-100 hover:bg-gray-200 cursor-pointer rounded-full flex-grow py-3 px-5 text-gray-500 font-medium transition">
-                    Commencer un post...
+        <!-- COLONNE GAUCHE (Mini Profil) -->
+        <div class="hidden lg:block space-y-2">
+            <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                <div class="h-14 bg-gray-300 relative">
+                    <!-- Photo de couverture basique -->
                 </div>
-                <button onclick="startVoicePost()" class="w-12 h-12 bg-green-100 text-green-600 hover:bg-green-200 rounded-full flex items-center justify-center shrink-0 transition" title="Dicter un post à la voix">
-                    <i class="fas fa-microphone text-xl"></i>
-                </button>
-                <button onclick="toggleModal('post-modal')" class="w-12 h-12 bg-blue-100 text-blue-600 hover:bg-blue-200 rounded-full flex items-center justify-center shrink-0 transition hidden sm:flex">
-                    <i class="fas fa-image text-xl"></i>
-                </button>
+                <div class="flex justify-center -mt-8 relative">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center border-2 border-white shadow-sm text-gray-400 text-3xl"><i class="fas fa-user-circle"></i></div>
+                </div>
+                <div class="text-center p-4 pt-2 border-b border-gray-200">
+                    <h3 class="font-bold text-gray-900 hover:underline cursor-pointer">Talent BoloWork</h3>
+                    <p class="text-xs text-gray-500 mt-1">Professionnel indépendant à Dakar</p>
+                </div>
+                <div class="p-3 text-xs font-semibold text-gray-500 hover:bg-gray-50 cursor-pointer flex justify-between">
+                    <span>Vues de votre profil</span>
+                    <span class="text-green-600">42</span>
+                </div>
+                <div class="p-3 text-xs font-semibold text-gray-500 hover:bg-gray-50 cursor-pointer flex justify-between border-t border-gray-200">
+                    <span>Relations</span>
+                    <span class="text-green-600">18</span>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg border border-gray-200 p-3 sticky top-20">
+                <p class="text-xs text-gray-500 hover:underline cursor-pointer">Groupes</p>
+                <p class="text-xs text-gray-500 hover:underline cursor-pointer mt-2">Événements</p>
+                <p class="text-xs text-gray-500 hover:underline cursor-pointer mt-2">Hashtags suivis</p>
+            </div>
+        </div>
+
+        <!-- COLONNE CENTRALE (Le Fil d'Actualité) -->
+        <div class="w-full max-w-[600px] mx-auto lg:mx-0 lg:max-w-none space-y-4">
+            
+            <!-- Box de création de post -->
+            <div class="bg-white rounded-lg border border-gray-200 p-3">
+                <div class="flex items-center space-x-2 mb-2">
+                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 shrink-0"><i class="fas fa-user"></i></div>
+                    <button onclick="toggleModal('post-modal')" class="flex-grow text-left bg-white border border-gray-400 hover:bg-gray-100 rounded-full py-3 px-4 text-gray-500 font-semibold transition">
+                        Commencer un post
+                    </button>
+                </div>
+                <div class="flex justify-around pt-2">
+                    <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 p-3 rounded-md font-semibold text-sm transition">
+                        <i class="fas fa-image text-blue-500 text-xl"></i> <span class="hidden sm:inline">Média</span>
+                    </button>
+                    <!-- Le bouton IA VOCALE au centre de la création de post -->
+                    <button onclick="startVoicePost()" class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 p-3 rounded-md font-semibold text-sm transition tooltip" title="Parler à l'IA">
+                        <i class="fas fa-microphone text-green-600 text-xl"></i> <span class="hidden sm:inline">Vocal (IA)</span>
+                    </button>
+                    <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 p-3 rounded-md font-semibold text-sm transition">
+                        <i class="fas fa-briefcase text-purple-500 text-xl"></i> <span class="hidden sm:inline">Offre d'emploi</span>
+                    </button>
+                    <button class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 p-3 rounded-md font-semibold text-sm transition">
+                        <i class="fas fa-newspaper text-orange-500 text-xl"></i> <span class="hidden sm:inline">Article</span>
+                    </button>
+                </div>
             </div>
 
-            <!-- Div où les VRAIS posts venant de Supabase s'afficheront -->
+            <!-- Séparateur de tri -->
+            <div class="flex items-center space-x-2">
+                <hr class="flex-grow border-gray-300">
+                <span class="text-xs text-gray-500">Classer par : <span class="font-bold text-gray-800">Pertinence <i class="fas fa-caret-down"></i></span></span>
+            </div>
+
+            <!-- CONTENEUR DES VRAIS POSTS SUPABASE -->
             <div id="new-posts-area">
-                <p class="text-center text-gray-500 py-4"><i class="fas fa-spinner fa-spin"></i> Connexion à Supabase en cours...</p>
+                <p class="text-center text-gray-500 py-8"><i class="fas fa-spinner fa-spin text-2xl"></i><br>Chargement du fil...</p>
             </div>
             
-        </main>
+        </div>
 
-        <!-- Right Sidebar (Widgets) -->
-        <aside class="hidden lg:block w-80 fixed right-auto custom-sidebar-right space-y-6">
-            <!-- Widget Entreprises à suivre -->
-            <div class="bg-white rounded-3xl shadow-sm p-6 border border-gray-100">
-                <h3 class="font-bold text-gray-800 mb-4">Entreprises qui recrutent</h3>
+        <!-- COLONNE DROITE (Suggestions) -->
+        <div class="hidden lg:block space-y-4">
+            <div class="bg-white rounded-lg border border-gray-200 p-4 sticky top-20">
+                <h3 class="font-bold text-gray-900 mb-4 text-sm">Ajouter à votre fil d'actualité</h3>
                 
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-gray-800 text-white rounded-md flex items-center justify-center font-bold text-sm">SN</div>
-                        <div>
-                            <h4 class="font-bold text-gray-800 text-sm">SenTech Solutions</h4>
-                            <p class="text-xs text-gray-500">Tech • 150 abonnés</p>
-                        </div>
+                <div class="flex items-start space-x-3 mb-4">
+                    <div class="w-12 h-12 bg-gray-800 text-white rounded-full flex items-center justify-center font-bold text-xs shrink-0">SN</div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">SenTech Solutions</h4>
+                        <p class="text-xs text-gray-500 mb-2">Entreprise • Technologies et Services</p>
+                        <button class="text-gray-600 border border-gray-500 hover:bg-gray-100 px-4 py-1.5 rounded-full font-bold text-sm transition"><i class="fas fa-plus"></i> Suivre</button>
                     </div>
-                    <button class="text-blue-600 bg-blue-50 px-3 py-1 rounded-full font-bold text-xs hover:bg-blue-100 transition">+ Suivre</button>
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-orange-500 text-white rounded-md flex items-center justify-center font-bold text-sm">BTP</div>
-                        <div>
-                            <h4 class="font-bold text-gray-800 text-sm">Africa Build</h4>
-                            <p class="text-xs text-gray-500">Construction • Dakar</p>
-                        </div>
+                <div class="flex items-start space-x-3 mb-4">
+                    <div class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-xs shrink-0">BTP</div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">Africa Build</h4>
+                        <p class="text-xs text-gray-500 mb-2">Entreprise • BTP et Construction</p>
+                        <button class="text-gray-600 border border-gray-500 hover:bg-gray-100 px-4 py-1.5 rounded-full font-bold text-sm transition"><i class="fas fa-plus"></i> Suivre</button>
                     </div>
-                    <button class="text-blue-600 bg-blue-50 px-3 py-1 rounded-full font-bold text-xs hover:bg-blue-100 transition">+ Suivre</button>
                 </div>
                 
-                <a href="#" class="block text-center text-sm font-bold text-gray-500 hover:text-green-600 mt-4">Voir toutes les entreprises</a>
+                <a href="#" class="block text-sm font-semibold text-gray-500 hover:bg-gray-50 p-1 rounded transition mt-4">Voir toutes les suggestions <i class="fas fa-arrow-right"></i></a>
             </div>
-        </aside>
+        </div>
 
     </div>
 
     <!-- MODAL DE CRÉATION DE POST -->
-    <div id="post-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col">
-            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                <h2 class="text-xl font-bold text-gray-800">Créer un post</h2>
-                <button onclick="toggleModal('post-modal')" class="text-gray-400 hover:text-gray-600 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200 transition">
+    <div id="post-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 z-50 flex items-start justify-center pt-20 px-4">
+        <div class="bg-white rounded-lg w-full max-w-lg shadow-2xl overflow-hidden flex flex-col">
+            <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                <h2 class="text-xl font-normal text-gray-800">Créer un post</h2>
+                <button onclick="toggleModal('post-modal')" class="text-gray-500 hover:bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full transition">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
             <div class="p-6">
                 <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-400"><i class="fas fa-user"></i></div>
+                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 text-xl"><i class="fas fa-user-circle"></i></div>
                     <div>
-                        <h3 class="font-bold text-gray-800">Mon Profil</h3>
-                        <p class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-md inline-block">Visible par tous</p>
+                        <h3 class="font-bold text-gray-900">Talent BoloWork</h3>
+                        <button class="text-xs border border-gray-500 text-gray-600 px-2 py-1 rounded-full mt-1 hover:bg-gray-100 font-semibold"><i class="fas fa-globe-americas"></i> N'importe qui <i class="fas fa-caret-down"></i></button>
                     </div>
                 </div>
-                <textarea id="post-content" rows="4" class="w-full resize-none text-lg text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="De quoi voulez-vous parler ? Partagez une réalisation, une offre..."></textarea>
+                <textarea id="post-content" rows="5" class="w-full resize-none text-lg text-gray-800 placeholder-gray-500 focus:outline-none" placeholder="De quoi souhaitez-vous discuter ?"></textarea>
             </div>
-            <div class="px-6 py-4 flex items-center justify-between border-t border-gray-100">
-                <div class="flex space-x-2">
-                    <button class="w-10 h-10 rounded-full bg-green-50 text-green-600 flex items-center justify-center hover:bg-green-100 transition tooltip" title="Note Vocale">
-                        <i class="fas fa-microphone"></i>
-                    </button>
-                    <button class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-100 transition tooltip" title="Ajouter une photo">
-                        <i class="fas fa-image"></i>
-                    </button>
-                    <button class="w-10 h-10 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center hover:bg-orange-100 transition tooltip" title="Ajouter un document">
-                        <i class="fas fa-file-alt"></i>
-                    </button>
+            <div class="px-6 py-3 flex items-center justify-between">
+                <div class="flex space-x-1">
+                    <button class="w-10 h-10 rounded-full text-gray-500 flex items-center justify-center hover:bg-gray-100 transition tooltip"><i class="fas fa-image text-xl"></i></button>
+                    <button class="w-10 h-10 rounded-full text-gray-500 flex items-center justify-center hover:bg-gray-100 transition tooltip"><i class="fab fa-youtube text-xl"></i></button>
+                    <button class="w-10 h-10 rounded-full text-gray-500 flex items-center justify-center hover:bg-gray-100 transition tooltip"><i class="fas fa-briefcase text-xl"></i></button>
+                    <button class="w-10 h-10 rounded-full text-gray-500 flex items-center justify-center hover:bg-gray-100 transition tooltip"><i class="fas fa-ellipsis-h text-xl"></i></button>
                 </div>
-                <button onclick="publishPost()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-xl transition shadow">
+                <button onclick="publishPost()" class="bg-gray-200 text-gray-400 font-bold py-1.5 px-4 rounded-full transition" id="post-btn">
                     Publier
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Tab Bar (Mobile) -->
-    <nav class="md:hidden fixed bottom-0 w-full bg-white border-t border-gray-200 flex justify-around p-3 z-40">
-        <a href="#" class="flex flex-col items-center text-green-600">
-            <i class="fas fa-home text-xl mb-1"></i><span class="text-xs font-bold">Accueil</span>
+    <!-- Bottom Tab Bar (Mobile uniquement) -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-white border-t border-gray-200 flex justify-around p-2 z-40">
+        <a href="#" class="flex flex-col items-center text-gray-900">
+            <i class="fas fa-home text-xl mb-1"></i><span class="text-[10px] font-semibold">Accueil</span>
         </a>
-        <a href="recruiter.html" class="flex flex-col items-center text-gray-400">
-            <i class="fas fa-users text-xl mb-1"></i><span class="text-xs font-semibold">Réseau</span>
+        <a href="recruiter.html" class="flex flex-col items-center text-gray-500">
+            <i class="fas fa-user-friends text-xl mb-1"></i><span class="text-[10px] font-semibold">Réseau</span>
         </a>
-        <div class="relative" style="top: -24px;">
-            <button onclick="toggleModal('post-modal')" class="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg border-4 border-gray-100">
-                <i class="fas fa-plus text-2xl"></i>
-            </button>
-        </div>
-        <a href="#" class="flex flex-col items-center text-gray-400">
-            <i class="fas fa-briefcase text-xl mb-1"></i><span class="text-xs font-semibold">Emplois</span>
+        <a href="#" onclick="toggleModal('post-modal')" class="flex flex-col items-center text-gray-500">
+            <i class="fas fa-plus-square text-xl mb-1"></i><span class="text-[10px] font-semibold">Publier</span>
         </a>
-        <a href="#" class="flex flex-col items-center text-gray-400">
-            <i class="fas fa-user text-xl mb-1"></i><span class="text-xs font-semibold">Profil</span>
+        <a href="#" class="flex flex-col items-center text-gray-500">
+            <i class="fas fa-bell text-xl mb-1"></i><span class="text-[10px] font-semibold">Notifs</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-500">
+            <i class="fas fa-briefcase text-xl mb-1"></i><span class="text-[10px] font-semibold">Emplois</span>
         </a>
     </nav>
 
-    <!-- Inclusion du script principal avec Supabase -->
+    <!-- Inclusion de la logique Supabase -->
     <script type="module" src="app.js"></script>
+    <script>
+        // Activer visuellement le bouton Publier quand du texte est tapé
+        document.addEventListener('DOMContentLoaded', () => {
+            const content = document.getElementById('post-content');
+            const btn = document.getElementById('post-btn');
+            if(content && btn) {
+                content.addEventListener('input', () => {
+                    if(content.value.trim().length > 0) {
+                        btn.classList.replace('bg-gray-200', 'bg-green-600');
+                        btn.classList.replace('text-gray-400', 'text-white');
+                    } else {
+                        btn.classList.replace('bg-green-600', 'bg-gray-200');
+                        btn.classList.replace('text-white', 'text-gray-400');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
