@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoloWork - Recherche de Talents</title>
+    <script src="tailwind-local.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <nav class="bg-white shadow-sm py-4 px-8 flex justify-between items-center fixed w-full top-0 z-50">
+        <a href="index.html" class="text-2xl font-extrabold text-emerald-600"><i class="fas fa-arrow-left mr-2"></i> Accueil</a>
+        <div class="font-bold text-gray-700 hidden md:block">Espace Recruteur</div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-24 pb-12">
+        <div class="bg-white rounded-3xl shadow-lg p-8 mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">De quel talent avez-vous besoin ?</h2>
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="relative flex-grow">
+                    <i class="fas fa-search absolute left-6 top-5 text-gray-400 text-xl"></i>
+                    <input type="text" placeholder="Ex: Plombier aux Almadies, Développeur web à Dakar..." class="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 pl-14 pr-4 text-gray-700 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition">
+                </div>
+                <button class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-10 rounded-2xl shadow-lg text-lg transition">Rechercher</button>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-gray-700">Talents vérifiés recommandés (Dakar)</h3>
+            <span class="text-emerald-600 font-semibold cursor-pointer">Voir sur la carte <i class="fas fa-map"></i></span>
+        </div>
+
+        <!-- Grid de talents -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Talent 1 -->
+            <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1 flex flex-col">
+                <div class="p-6 flex-grow">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl"><i class="fas fa-bolt"></i></div>
+                        <div class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-check-circle mr-1"></i> Vérifié</div>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-800 mb-1">Khadim Fall</h4>
+                    <p class="text-emerald-600 font-semibold mb-2">Électricien Bâtiment</p>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Ngor, Dakar (à 2km)</p>
+                    <p class="text-gray-600 text-sm line-clamp-3">"Spécialiste en câblage résidentiel et dépannage d'urgence. Disponible 7j/7 pour vos travaux électriques avec matériel professionnel."</p>
+                </div>
+                <div class="bg-gray-50 p-4 border-t border-gray-100 flex justify-between items-center">
+                    <div class="text-yellow-500 font-bold"><i class="fas fa-star"></i> 4.9 <span class="text-gray-400 text-xs">(12 avis)</span></div>
+                    <button class="bg-[#25D366] hover:bg-green-600 text-white font-bold py-2 px-6 rounded-xl flex items-center space-x-2 transition">
+                        <i class="fab fa-whatsapp"></i> <span>Contacter</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Talent 2 -->
+            <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1 flex flex-col">
+                <div class="p-6 flex-grow">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-2xl"><i class="fas fa-laptop-code"></i></div>
+                        <div class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full"><i class="fas fa-check-circle mr-1"></i> Vérifié</div>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-800 mb-1">Fatou Sow</h4>
+                    <p class="text-emerald-600 font-semibold mb-2">Développeuse Web & Mobile</p>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Plateau, Dakar (à 5km)</p>
+                    <p class="text-gray-600 text-sm line-clamp-3">"Création de sites vitrines et applications mobiles sur mesure. Maitrise de React, Node.js et Flutter. 3 ans d'expérience en startup."</p>
+                </div>
+                <div class="bg-gray-50 p-4 border-t border-gray-100 flex justify-between items-center">
+                    <div class="text-yellow-500 font-bold"><i class="fas fa-star"></i> 5.0 <span class="text-gray-400 text-xs">(8 avis)</span></div>
+                    <button class="bg-[#25D366] hover:bg-green-600 text-white font-bold py-2 px-6 rounded-xl flex items-center space-x-2 transition">
+                        <i class="fab fa-whatsapp"></i> <span>Contacter</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Talent 3 -->
+            <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1 flex flex-col">
+                <div class="p-6 flex-grow">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-2xl"><i class="fas fa-hammer"></i></div>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-800 mb-1">Abdoulaye Diop</h4>
+                    <p class="text-emerald-600 font-semibold mb-2">Menuisier Charpentier</p>
+                    <p class="text-gray-500 text-sm mb-4"><i class="fas fa-map-marker-alt"></i> Rufisque (à 15km)</p>
+                    <p class="text-gray-600 text-sm line-clamp-3">"Travail du bois local, charpente et meubles d'intérieur. Finitions soignées."</p>
+                </div>
+                <div class="bg-gray-50 p-4 border-t border-gray-100 flex justify-between items-center">
+                    <div class="text-yellow-500 font-bold"><i class="fas fa-star"></i> 4.5 <span class="text-gray-400 text-xs">(3 avis)</span></div>
+                    <button class="bg-[#25D366] hover:bg-green-600 text-white font-bold py-2 px-6 rounded-xl flex items-center space-x-2 transition">
+                        <i class="fab fa-whatsapp"></i> <span>Contacter</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
