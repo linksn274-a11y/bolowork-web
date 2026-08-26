@@ -37,7 +37,7 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
     
     // ASTUCE MVP : On simule l'authentification par téléphone en utilisant l'Auth Email de Supabase sous le capot.
     // Cela permet d'avoir une DB sécurisée sans avoir à payer/configurer l'API SMS Twilio pour le moment.
-    const fakeEmail = `${phone}@bolowork.app`;
+    const fakeEmail = `user${phone}@bolowork.com`;
     const safePassword = `${pin}Bolo!`; // Supabase exige min 6 caractères
     
     btn.innerHTML = '<i class="fas fa-spinner fa-spin text-xl"></i>';
